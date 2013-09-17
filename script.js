@@ -99,7 +99,7 @@ jQuery(function ($) {
 
 	// Playback.
 	var fps = 20,
-		speed = 1000,
+		speed = 100,
 		currentLocation = 0,
 		duration = (Event.end.getTime() - Event.start.getTime()) / 1000,
 		playbackStarted,

@@ -29,6 +29,7 @@ html {
 	background: #333;
 	background: hsl(255,80%,40%);
 	text-align: center;
+    color: black;
 }
 
 #ctrl {
