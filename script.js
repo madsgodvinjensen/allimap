@@ -99,7 +99,7 @@ jQuery(function ($) {
 
 	// Playback.
 	var fps = 20,
-		speed = 100,
+		speed = 120,
 		currentLocation = 0,
 		duration = (Event.end.getTime() - Event.start.getTime()) / 1000,
 		playbackStarted,
@@ -127,7 +127,7 @@ jQuery(function ($) {
 						seen = point[0],
 						at = Controls[point[1]],
 						newScore = point[2];
-
+						
 					if (seen >= currentLocation) {
 						var covered = (currentLocation - enrouteSince) / (seen - enrouteSince);
 						if (at !== location) {

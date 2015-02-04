@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<pre class="output">
+</pre>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+	$.get("ALLI_2015_Loebstider.csv", function(response) {
+		var lines = response.split("\n");
+		
+		var sjak = lines[1][8],
+			line = "";
+		
+		for( var i = 1; i < lines.length; i++ ) {
+			console.log(sjak);
+			console.log(lines[i][8]);
+			
+			var data = lines[i].split(";");
+			
+			if( data[8] != sjak ) {
+				line = line.slice(0, line.length -1);
+				
+				$(".output").append('{name: "'+ sjak +'", track: [[0,0,0], '+ line +']},\n');
+				line = "";
+			}
+
+			line += data[16];
+			sjak = data[8];
+		}
+	});
+</script>
