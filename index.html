@@ -34,38 +34,3 @@
 
 <script src="data.js"></script>
 <script src="script.js"></script>
-
-<!--
-<script>
-    $.get("data.csv", function(data) {
-        var lines = data.split("\n");
-        var s = "";
-        for( var i = 0; i < lines.length; i++ ) {
-            var cols = lines[i].split(";");
-            s += "\n{name:'" + cols[0] + "',track:[";
-            s += "[0,0," + i * 100 + "],";
-            
-            for( var j = 1; j < cols.length; j++ ) {
-                var rgx = /(\d(:))?(\d*).(\d*)/gi;
-                var result = rgx.exec(cols[j]);
-                
-                if(result) {
-                    var hours = result[1] ? parseFloat(result[1]) * 60 * 60 : 0,
-                        minutes = result[3] ? parseFloat(result[3]) * 60 : 0,
-                        seconds = result[4] ? parseFloat(result[4]) : 0;
-                    
-                    var time = isNaN(hours) ? 0 : hours;
-                    time += isNaN(minutes) ? 0 : minutes;
-                    time += isNaN(seconds) ? 0 : seconds;
-                    
-                    s += "[" + time + "," + (j-1) + "," + i * 100 + "],";
-                }
-            }
-            s = s.substr(0, s.length - 1);
-            s += "]},";
-        }
-        
-        console.log( s );
-    });
-</script>
--->

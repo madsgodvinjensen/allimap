@@ -14,11 +14,28 @@ jQuery(function ($) {
 		mapDrag = false,
 		markers = [];
 
+			// $map.css("cursor", "crosshair");
+			// $map.click(function (e) {
+			// 	console.log('{ x:' + (100 * e.offsetX / $map.width()) +
+			// 				', y:' + (100 * e.offsetY / $map.height()) + '},');
+			// });
+			//
+			// for( var i = 0; i < Controls.length; i++ ) {
+			// 	$("<div/>").html(i).css({
+			// 		backgroundColor: "red",
+			// 		padding: "20px",
+			// 		position: "absolute",
+			// 		left: Controls[i].x + '%',
+			// 		top: Controls[i].y + '%'
+			// 	}).appendTo($map);
+			// }
+		
+
 	for (var i = 0; i < Runners.length; i++) {
 		var runner = Runners[i];
 
 		markers[i] = $('<div class=marker>')
-			.text(runner.name)
+			.text(runner.no)
 			.appendTo($map);
 
 		$('<input type=checkbox checked>')
@@ -29,14 +46,15 @@ jQuery(function ($) {
 					checked = $input.is(':checked'),
 					runner = Runners[id];
 
-				trackEvent('Runners', checked ? 'Show' : 'Hide', runner.name);
+				trackEvent('Runners', checked ? 'Show' : 'Hide', runner.no);
 				markers[id].toggle(checked);
 				
 				$runnersBtn.text($(':checked', $runners).size() + ' sjak');
 			})
 			.appendTo($runners)
 			.wrap('<label>')
-			.after(document.createTextNode(runner.name));
+			.attr("title", runner.name)
+			.after(document.createTextNode(runner.no));
 	}
 
 	$('.all', $runners).click(function () {
@@ -99,7 +117,7 @@ jQuery(function ($) {
 
 	// Playback.
 	var fps = 20,
-		speed = 120,
+		speed = 1000,
 		currentLocation = 0,
 		duration = (Event.end.getTime() - Event.start.getTime()) / 1000,
 		playbackStarted,
@@ -130,7 +148,12 @@ jQuery(function ($) {
 						
 					if (seen >= currentLocation) {
 						var covered = (currentLocation - enrouteSince) / (seen - enrouteSince);
-						if (at !== location) {
+						if (at && at !== location) {
+							
+							if( !location ){
+								debugger;
+							}
+							
 							location = {
 								x: location.x + covered * (at.x - location.x),
 								y: location.y + covered * (at.y - location.y)
@@ -145,6 +168,10 @@ jQuery(function ($) {
 					score = newScore;
 
 					cache[i] = j;
+				}
+				
+				if( !location  ) {
+					debugger;
 				}
 
 				markers[i].css({
